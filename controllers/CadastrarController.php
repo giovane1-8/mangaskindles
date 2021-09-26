@@ -45,15 +45,15 @@ class CadastrarController extends Controller
             }
 
 
-            \ROUTER::rota("cadastrar/emailemuso", function () {
+            \Router::rota("cadastrar/emailemuso", function () {
                 $this->view->render("cadastrar", "Cadastrar", $this->generos);
                 $this->view->msgEmail();
             });
-            \ROUTER::rota("cadastrar/nicknameemuso", function () {
+            \Router::rota("cadastrar/nicknameemuso", function () {
                 $this->view->render("cadastrar", "Cadastrar", $this->generos);
                 $this->view->msgNickname();
             });
-            \ROUTER::rota("cadastrar/erro", function () {
+            \Router::rota("cadastrar/erro", function () {
                 $this->view->render("cadastrar", "Erro", $this->generos);
                 $this->view->msgErr();
             });
