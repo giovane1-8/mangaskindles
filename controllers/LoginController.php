@@ -62,6 +62,8 @@ class LoginController extends Controller
                 } else {
                     header("location: " . VENDOR_PATH . "login/erro");
                 }
+            }else{
+                header('location: '. VENDOR_PATH."login");
             }
         });
 

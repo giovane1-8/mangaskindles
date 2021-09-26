@@ -1,5 +1,5 @@
 <?php
-    define("VENDOR_PATH","http://192.168.15.11/Site de Livros Kindle/");
+    define("VENDOR_PATH","http://mangaskindle.getenjoyment.net/");
     if(empty($_SESSION['isLogado'])){
         $_SESSION['isLogado'] = false;
     };
@@ -12,7 +12,7 @@
                 $url = explode("/",$_GET['url']);
                 $class = 'Controllers\\'.ucfirst($url[0])."Controller";
             }else{
-                $class = 'Controllers\\'.self::DEFAULT."Controller";
+                $class = "Controllers\\HomeController";
                 $url[0] = self::DEFAULT;
             }
 
