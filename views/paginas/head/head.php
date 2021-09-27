@@ -29,7 +29,7 @@
           </li>
           <?php if ($_SESSION['isLogado']) : ?>
             <li class="col nav-item">
-              <a class="nav-link" style="color: <?php echo $_SESSION['nm_cor_favorita'] ?>" href="<?php echo VENDOR_PATH ?>login/"><?php echo $_SESSION['nm_nickname'] ?></a>
+              <a class="nav-link" style="color: <?php echo $_SESSION['nm_cor_favorita'] ?>" href="<?php echo VENDOR_PATH ?>painel"><?php echo $_SESSION['nm_nickname'] ?></a>
             </li>
             <li class="col nav-item">
               <a class="nav-link" style="color: red" href="<?php echo VENDOR_PATH ?>login/sair">Sair</a>
@@ -53,6 +53,7 @@
       </div>
     </nav>
 
+    <?php if(explode("/",@$_GET['url'])[0] != "painel"): ?>
     <div class="alert alert-warning mt-3 mb-3 ">
       <h4 style="color: red;" class="alert-heading">ALERTA!</h4>
       <p>Nosso site não possui nenhum tipo de conteudo pirata somos só um agregador de link como o Google.</p>
@@ -60,6 +61,7 @@
       <p class="mb-0">Grato a Administração.</p>
     </div>
 
+      
     <div class="float-right">
       <h3>Genero</h3>
       <ul style="list-style: none">
@@ -68,9 +70,6 @@
           <li><a style='color: black' href=" genero/<?php echo $AllGeneros[$key]['nm_genero'] ?> "> <?php echo $AllGeneros[$key]['nm_genero'] ?> </a></li>
 
         <?php endforeach; ?>
-
-
-
-
       </ul>
     </div>
+    <?php endif; ?>

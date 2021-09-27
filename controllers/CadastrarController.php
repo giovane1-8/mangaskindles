@@ -17,7 +17,7 @@ class CadastrarController extends Controller
         }
             if (!empty($_POST)) {
                 $this->dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-                $_SESSION["nm_nome"] = $this->dados["nome"];
+                $_SESSION["nm_usuario"] = $this->dados["nome"];
                 $_SESSION["nm_nickname"] = $this->dados["nickname"];
                 $_SESSION["nm_email"] = $this->dados["email"];
                 $_SESSION["nm_senha"] = $this->dados["senha"];

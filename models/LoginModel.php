@@ -22,9 +22,11 @@
                 $_SESSION['isLogado'] = true;
                 $_SESSION['id_usuario'] = $return['id_usuario'];
                 $_SESSION['nm_usuario'] = $return['nm_usuario'];
+                $_SESSION['nm_senha'] = $return['nm_senha'];
                 $_SESSION['nm_email'] = $return['nm_email'];
                 $_SESSION['nm_nickname'] = $return['nm_nickname'];
                 $_SESSION['nm_cor_favorita'] = $return['nm_cor_favorita'];
+                $_SESSION['nm_caminho_foto'] = $return['nm_caminho_foto'];
                 $this -> resultado = true;
             }else{ 
                 $_SESSION['isLogado'] = false;

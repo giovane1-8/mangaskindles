@@ -3,7 +3,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="nome">Nome e sobrenome</label>
-                <input type="text" class="form-control" name="nome" id="nome" aria-describedby="emailHelp" placeholder="Seu nome" value="<?php if(isset($_SESSION["nm_nome"])){echo $_SESSION["nm_nome"];}?>">
+                <input type="text" class="form-control" name="nome" id="nome" aria-describedby="emailHelp" placeholder="Seu nome" value="<?php if(isset($_SESSION["nm_usuario"])){echo $_SESSION["nm_usuario"];}?>">
             </div>
             <div class="form-group col-sm-6">
 

@@ -1,5 +1,5 @@
 <?php
-    define("VENDOR_PATH","http://mangaskindle.getenjoyment.net/");
+    define("VENDOR_PATH","http://192.168.15.11/Site%20de%20Livros%20Kindle%20%200.0.2/");
     if(empty($_SESSION['isLogado'])){
         $_SESSION['isLogado'] = false;
     };

@@ -123,6 +123,10 @@ body {
     background: black;
 }
 
+.darkmode--activated .btn {
+    color: #fff;
+}
+
 .darkmode-background {
     transform: scale(100) !important;
     transition: 1s !important;

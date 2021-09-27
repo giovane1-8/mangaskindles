@@ -41,6 +41,10 @@
                         <div class='modal-body'>
                         <font color ='red'>Preencha todos os dados corretamente</font>;
                         </div>
+                        <div class='modal-footer'>
+                            <a href= '" . VENDOR_PATH . "login/recuperarsenha'> <button  class='btn btn-primary'>RECUPERAR SENHA</button><a>
+                            <a href= '" . VENDOR_PATH . "login'> <button  class='btn btn-primary'>Fazer Login</button><a>
+                        </div>
                     </div>
                 </div>
             </div>
