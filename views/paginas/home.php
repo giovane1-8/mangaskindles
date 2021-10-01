@@ -2,7 +2,7 @@
 
   <div class=" card-deck mt-4">
     <div class="card">
-      <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capa_manga/hunterxhunter.png" alt="Imagem de capa do card">
+      <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/hunterxhunter.png" alt="Imagem de capa do card">
       <div class="card-body">
         <h5 class="card-title">Título do card</h5>
         <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um
@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="card">
-      <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capa_manga/jujutsu.png" alt="Imagem de capa do card">
+      <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/jujutsu.png" alt="Imagem de capa do card">
       <div class="card-body">
         <h5 class="card-title">Título do card</h5>
         <p class="card-text">Este é um card com suporte a texto embaixo, que funciona como uma introdução a um
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="card">
-      <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capa_manga/rezero.png" alt="Imagem de capa do card">
+      <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/rezero.png" alt="Imagem de capa do card">
       <div class="card-body">
         <h5 class="card-title">Título do card</h5>
         <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um
@@ -46,7 +46,7 @@
 
   <div class="card-deck mt-4">
     <div class="card">
-      <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capa_manga/attackontitanAntesdaqueda.png" alt="Imagem de capa do card">
+      <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/attackontitanAntesdaqueda.png" alt="Imagem de capa do card">
       <div class="card-body">
         <h5 class="card-title">Título do card</h5>
         <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="card">
-      <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capa_manga/jujutsu.png" alt="Imagem de capa do card">
+      <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/jujutsu.png" alt="Imagem de capa do card">
       <div class="card-body">
         <h5 class="card-title">Título do card</h5>
         <p class="card-text">Este é um card com suporte a texto embaixo, que funciona como uma introdução a um
@@ -68,7 +68,7 @@
       </div>
     </div>
     <div class="card">
-      <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capa_manga/rezero.png" alt="Imagem de capa do card">
+      <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/rezero.png" alt="Imagem de capa do card">
       <div class="card-body">
         <h5 class="card-title">Título do card</h5>
         <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um

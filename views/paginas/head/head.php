@@ -7,7 +7,9 @@
   <title><?php echo $this->titlePage; ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel='stylesheet' type='text/css' media='screen' href='<?php echo VENDOR_PATH ?>recursos/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="https://unpkg.com/jcrop/dist/jcrop.css">
   <link rel='stylesheet' type='text/css' media='screen' href='<?php echo VENDOR_PATH ?>recursos/css/index.css'>
+  
 </head>
 
 <body class='bodydarktheme'>

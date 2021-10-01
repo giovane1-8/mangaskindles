@@ -1,19 +1,41 @@
+<link rel="stylesheet" type="text/css" href="<?php echo VENDOR_PATH ?>recursos/css/jquery.Jcrop.css" />
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Título do modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body col">
+                <center>
+                    <output id="result"></output>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="sendButton" value="Recortar">Recortar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row card-deck mt-3">
+
+
     <center>
-        <figure class="figure col">
+        <figure class="figure">
 
-        <label for="image" style="cursor: pointer;">
-        <img src="<?php if (!empty($_SESSION['nm_caminho_foto'])) {
-                            echo $_SESSION['nm_caminho_foto'];
-                        } else {
-                            echo VENDOR_PATH . "recursos/img/foto_usuario/default.png";
-                        }
-                        ?>" class="figure-img img-fluid rounded" alt="Imagem de um quadrado genérico com bordas arredondadas, em uma figure.">
-        </label>
-        <input class="d-none" type="file" id="image">
-            
+            <label for="arquivo" style="cursor: pointer;">
+                <img id="cropbox" src="<?php echo VENDOR_PATH . $_SESSION['nm_caminho_foto']; ?>" class="figure-img img-fluid rounded">
+            </label>
+            <input class="d-none" type="file" accept=".png,.jpeg" id="arquivo">
+            <input type="hidden" id="x" name="x" />
+            <input type="hidden" id="y" name="y" />
+            <input type="hidden" id="w" name="w" />
+            <input type="hidden" id="h" name="h" />
         </figure>
-
+        <input type="submit" onclick="submitForm();" id="sendButton" value="Enviar">
+        
     </center>
     <div class="container form-group col-lg-6">
         <div class="form-group">
