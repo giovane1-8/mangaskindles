@@ -32,7 +32,6 @@ class LoginController extends Controller
             
             $this->dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
             $_SESSION['usuario'] = $this -> dados['usuario'];
-
             $this->model->validarLogin($this->dados);
             if ($this->model->getResultado()) {
                 header("location: " . VENDOR_PATH . "login/sucesso");
