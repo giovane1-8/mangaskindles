@@ -25,6 +25,5 @@
             }else{
                 include(self::PATHPAGES."footer/".$footer.".php"); 
             }
-
         }
     }

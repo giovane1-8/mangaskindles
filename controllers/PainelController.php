@@ -9,39 +9,58 @@ class PainelController extends Controller
         parent::__construct($view, $model);
     }
 
-    public function index(){
+    public function index()
+    {
         if ($_SESSION["isLogado"]) {
             \Router::rota("painel/crop", function () {
                 if (!empty($_POST)) {
                     sleep(1);
+
                     $fileType = $_POST['imgType'];
                     $imgName  = $_POST['imgName'];
-                    define('OUTPUT', 'recursos/img/' . $imgName);
-                    if ($fileType == 'image/png')
+                    define('OUTPUT', 'recursos\img\fotos_usuarios\\' . $imgName);
+                    if ($fileType == 'image/png') {
                         $img = imagecreatefrompng('recursos/img/tmp/' . $imgName);
-                    else
+                    } else {
                         $img = imagecreatefromjpeg('recursos/img/tmp/' . $imgName);
+                    }
                     $imgWidth  = imagesx($img);
                     $imgHeight = imagesy($img);
                     $newImage = imagecreatetruecolor(160, 160);
                     imagecopyresampled($newImage, $img, 0, 0, $_POST['x'], $_POST['y'], 160, 160, $_POST['w'], $_POST['h']);
-                    if ($fileType == 'image/png')
+                    if ($fileType == 'image/png') {
                         $finalImage = imagepng($newImage, OUTPUT);
-                    else
+                    } else {
                         $finalImage = imagejpeg($newImage, OUTPUT);
-                    if ($finalImage)
-                        echo 'Imagem criada com sucesso<img id="thumbnail" src="' . OUTPUT . '" />';
-                    else
+                    }
+                    if ($finalImage) {
+                        echo 'Imagem criada com sucesso<img id="thumbnail" src="' .VENDOR_PATH.OUTPUT. '" />';
+                    } else {
                         echo 'Ocorreu um erro ao tentar criar a nova imagem';
+                    }
+                    unlink("recursos/img/tmp/" . $imgName);
+
+
+                    if (!$this->model->addFotoPerfil(OUTPUT)) {
+                        unlink("recursos\img\\fotos_usuarios\\" . $imgName);
+                        echo "Erro ao Salvar imagem no banco de dados";
+                    } else {
+                        $a = explode(".", $_SESSION['nm_caminho_foto']);
+                        $n = explode(".", $imgName);
+                        if (end($a) != end($n)) {
+                            if(substr($_SESSION['nm_caminho_foto'], -11) != "default.png"){
+                                unlink($_SESSION["nm_caminho_foto"]);
+                            }
+                        }
+                        $_SESSION["nm_caminho_foto"] = OUTPUT;
+                    }
                 }
             });
 
-
             \Router::rota("painel/recebe", function () {
-
                 if (!empty($_POST)) {
                     if (!isset($_FILES['arquivo']['name']))
-                        exit(header('Location: .'));
+                        exit("selecione um arquivo");
                     else {
                         sleep(1);
                         $fileName  = $_FILES['arquivo']['name'];
@@ -88,7 +107,7 @@ class PainelController extends Controller
                             else
                                 $finalImage = imagejpeg($newImage, OUTPUT);
                             if ($finalImage)
-                                echo 'Imagem criada com sucesso<img onload="getCoords();" id="toCrop" src="' . OUTPUT . '" /><input type="hidden" id="imgType" value="' . $fileType . '"/><input type="hidden" id="imgName" value="' . $newName . '"/>';
+                                echo 'Imagem criada com sucesso<img onload="getCoords();" id="toCrop" src="' .VENDOR_PATH.OUTPUT . '" /><input type="hidden" id="imgType" value="' . $fileType . '"/><input type="hidden" id="imgName" value="' . $newName . '"/>';
                             else
                                 echo 'Ocorreu um erro ao tentar criar a nova imagem';
                         }
@@ -103,6 +122,14 @@ class PainelController extends Controller
                 } else {
                     $this->view->render("painel", 'Painel Do Usuario', $this->generos);
                 }
+            });
+            \Router::rota("painel/excluirfoto", function () {
+                if (!empty($_POST)) {
+                    unlink($_SESSION["nm_caminho_foto"]);
+                    $this->model->removerCaminhoFoto();
+                    $_SESSION["nm_caminho_foto"] = "recursos/img/fotos_usuarios/default.png";
+                    header('location: painel/..');
+                } 
             });
             \Router::rota("painel/nickname", function () {
                 if (!empty($_POST['nickname'])) {

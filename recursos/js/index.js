@@ -1,4 +1,12 @@
 var darkmode;
+const DEFAULT_PATH = "/Site de Livros Kindle  0.0.2/"
+
+function _(element) {
+    if (document.getElementById(element))
+        return document.getElementById(element);
+    else
+        return false;
+}
 const options = {
     bottom: '64px', // default: '32px'
     right: '1px', // default: '32px'
@@ -15,7 +23,7 @@ const options = {
 }
 darkmode = new Darkmode(options);
 if (darkmode.isActivated()) {
-    document.getElementById("myonoffswitch").checked = true;
+    _("myonoffswitch").checked = true;
 }
 
 
@@ -27,11 +35,11 @@ if (!isIOS) {
     window.onscroll = function() {
         var currentScrollPos = window.pageYOffset;
         if (prevScrollpos > currentScrollPos) {
-            document.getElementById("navbar").style.top = "0";
-            document.getElementById("footbar").style.bottom = "0";
+            _("navbar").style.top = "0";
+            _("footbar").style.bottom = "0";
         } else {
-            document.getElementById("navbar").style.top = "-100px";
-            document.getElementById("footbar").style.bottom = "-68px";
+            _("navbar").style.top = "-100px";
+            _("footbar").style.bottom = "-68px";
         }
         prevScrollpos = currentScrollPos;
     }
@@ -57,23 +65,16 @@ function updateCoords(c) {
     $('#h').val(c.h);
 };
 
-function _(element) {
-    if (document.getElementById(element))
-        return document.getElementById(element);
-    else
-        return false;
-}
 
 function submitForm() {
-
     if (_('arquivo').files[0]) { //Se houver um arquivo, faremos alguns testes no mesmo
         var arquivo = _('arquivo').files[0];
         if (arquivo.type != 'image/png' && arquivo.type != 'image/jpeg') {
-            $('.modal').modal('show');
+            $('.modal_alert_painel').modal('show');
             _('result').innerHTML = 'Por favor, selecione uma imagem do tipo JPEG ou PNG';
 
         } else if (arquivo.size > 1024 * 2048) {
-            $('.modal').modal('show');
+            $('.modal_alert_painel').modal('show');
             _('result').innerHTML = 'Por favor selecione uma image mo máximo 2MB de tamanho.';
         } //2MB
         else {
@@ -103,28 +104,31 @@ function submitForm() {
             } else {
                 var includeFile = 'painel/recebe';
             }
-            request.open('POST', includeFile, true);
+            request.open('POST', DEFAULT_PATH + includeFile, true);
 
             request.onreadystatechange = function() {
                 if (request.status == 200) {
-
+                    console.log(request)
                     _('result').innerHTML = request.responseText;
-                    $('.modal').modal('show');
+                    $('.modal_alert_painel').modal('show');
+                    _("modal-footer").innerHTML = "<input onclick=' submitForm();' type='button ' class='btn btn-primary mx-auto darkmode-ignore ' value='Recortar '>"
                 }
                 if (_('toCrop')) {
                     _('sendButton').value = 'Recortar';
-
                 }
             }
-            $('.modal').modal('show');
+            $('.modal_alert_painel').modal('show');
 
             request.send(formData);
 
-            _('result').innerHTML = '<img src="./recursos/gif/loading.gif" />';
+            _('result').innerHTML = '<img src="' + DEFAULT_PATH + 'recursos/gif/loading.gif" />';
         }
     } else {
-        $('.modal').modal('show');
+        $('.modal_alert_painel').modal('show');
         _('result').innerHTML = 'Por favor, selecione uma imagem para ser enviada!';
-
     }
 }
+$(".modal_alert_painel").on('hidden.bs.modal', function(e) {
+    _("result").innerHTML = " "
+    _("modal-footer").innerHTML = " "
+})
