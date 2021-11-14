@@ -125,10 +125,11 @@ class PainelController extends Controller
             });
             \Router::rota("painel/atualizar/nome", function () {
                 if (!empty($_POST['nome'])) {
-                    if (strlen($_POST["nome"]) <= 45) {
+                    $nome = trim($_POST['nome']);
+                    if (strlen($nome) <= 45) {
 
-                        if ($this->model->atualizar([$_POST['nome']], ["nm_usuario"])) {
-                            $_SESSION['nm_usuario'] = $_POST['nome'];
+                        if ($this->model->atualizar([$nome], ["nm_usuario"])) {
+                            $_SESSION['nm_usuario'] = $nome;
                         };
                         header("location: " . VENDOR_PATH . "painel");
                     }else{
@@ -142,10 +143,11 @@ class PainelController extends Controller
 
             \Router::rota("painel/atualizar/nickname", function () {
                 if (!empty($_POST['nickname'])) {
-                    if (strlen($_POST["nickname"]) <= 20) {
-                        if (!$this->model->verificarNickname($_POST['nickname'])) {
-                            if ($this->model->atualizar([$_POST['nickname']], ["nm_nickname"])) {
-                                $_SESSION['nm_nickname'] = $_POST['nickname'];
+                    $nickaname = trim($_POST['nickname']);
+                    if (strlen($nickaname) <= 20) {
+                        if (!$this->model->verificarNickname($nickaname)) {
+                            if ($this->model->atualizar([$nickaname], ["nm_nickname"])) {
+                                $_SESSION['nm_nickname'] = $nickaname;
                             };
                             header("location: " . VENDOR_PATH . "painel");
                         } else {
@@ -163,9 +165,10 @@ class PainelController extends Controller
 
             \Router::rota("painel/atualizar/email", function () {
                 if (!empty($_POST['email'])) {
-                    if (!$this->model->verificarEmail($_POST['email'])) {
-                        if ($this->model->atualizar([$_POST['email']], ["nm_email"])) {
-                            $_SESSION['nm_email'] = $_POST['email'];
+                    $email = trim($_POST['email']);
+                    if (!$this->model->verificarEmail($email)) {
+                        if ($this->model->atualizar([$email], ["nm_email"])) {
+                            $_SESSION['nm_email'] = $email;
                         };
                         header("location: " . VENDOR_PATH . "painel");
                     } else {
@@ -178,8 +181,9 @@ class PainelController extends Controller
             });
             \Router::rota("painel/atualizar/senha", function () {
                 if (!empty($_POST['senha'])) {
-                    if ($this->model->atualizar([$_POST['senha']], ["nm_senha"])) {
-                        $_SESSION['nm_senha'] = $_POST['senha'];
+                    $senha = trim($_POST['senha']);
+                    if ($this->model->atualizar([$senha], ["nm_senha"])) {
+                        $_SESSION['nm_senha'] = $senha;
                     };
                     header("location: " . VENDOR_PATH . "painel");
                 } else {
@@ -188,23 +192,15 @@ class PainelController extends Controller
             });
             \Router::rota("painel/atualizar/cor", function () {
                 if (!empty($_POST['cor'])) {
-                    if ($this->model->atualizar([$_POST['cor']], ["nm_cor_favorita"])) {
-                        $_SESSION['nm_cor_favorita'] = $_POST['cor'];
+                    $cor = trim($_POST['cor']);
+                    if ($this->model->atualizar([$cor], ["nm_cor_favorita"])) {
+                        $_SESSION['nm_cor_favorita'] = $cor;
                     };
                     header("location: " . VENDOR_PATH . "painel");
                 } else {
                     header("location: " . VENDOR_PATH . "painel");
                 }
             });
-
-
-
-
-
-
-
-
-
             //render("NOME DO ARQUIVOU DO CORPO", 'TITULO DA PAGINA', 'CABEÇA DA PAGINA , FOOTER DA PAGINA')
 
             $this->view->render("painel", 'Painel Do Usuario', $this->generos);

@@ -39,9 +39,7 @@
     }else{
         echo "#009090";
     }?>';
-    cor_contraria =  (16777215 - parseInt(cor_favorita.replace("#",""), 16)).toString(16);
-    createCSSSelector("body::-webkit-scrollbar-thumb", "border-radius:10px;background-color:#FFF;background-image:linear-gradient("+cor_favorita+",#"+cor_contraria+");")
-    
+    createCSSSelector("body::-webkit-scrollbar-thumb", "border-radius:10px;background-color:#FFF;background-image:linear-gradient("+cor_favorita+","+hexToComplimentary(cor_favorita)+");")
 </script>
 </body>
 

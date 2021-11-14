@@ -10,7 +10,6 @@
 
         public function validarLogin(array $dados = null){
             
-          
             $query = "SELECT * FROM tb_usuario WHERE (nm_email = :email OR nm_nickname = :email) AND nm_senha = :senha LIMIT 1";
             $result = $this -> PDO ->prepare($query);
             $result -> bindParam(':email', $dados['usuario'], \PDO::PARAM_STR);
