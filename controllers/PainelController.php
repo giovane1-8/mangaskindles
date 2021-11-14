@@ -18,7 +18,7 @@ class PainelController extends Controller
 
                     $fileType = $_POST['imgType'];
                     $imgName  = $_POST['imgName'];
-                    define('OUTPUT', 'recursos\img\fotos_usuarios\\' . $imgName);
+                    define('OUTPUT', 'recursos/img/fotos_usuarios/' . $imgName);
                     if ($fileType == 'image/png') {
                         $img = imagecreatefrompng('recursos/img/tmp/' . $imgName);
                     } else {
@@ -34,7 +34,7 @@ class PainelController extends Controller
                         $finalImage = imagejpeg($newImage, OUTPUT);
                     }
                     if ($finalImage) {
-                        echo 'Imagem criada com sucesso<img id="thumbnail" src="' .VENDOR_PATH.OUTPUT. '" />';
+                        echo 'Imagem criada com sucesso<img id="thumbnail" src="' . VENDOR_PATH . OUTPUT . '" />';
                     } else {
                         echo 'Ocorreu um erro ao tentar criar a nova imagem';
                     }
@@ -42,13 +42,13 @@ class PainelController extends Controller
 
 
                     if (!$this->model->addFotoPerfil(OUTPUT)) {
-                        unlink("recursos\img\\fotos_usuarios\\" . $imgName);
+                        unlink("recursos/img/fotos_usuarios/" . $imgName);
                         echo "Erro ao Salvar imagem no banco de dados";
                     } else {
                         $a = explode(".", $_SESSION['nm_caminho_foto']);
                         $n = explode(".", $imgName);
                         if (end($a) != end($n)) {
-                            if(substr($_SESSION['nm_caminho_foto'], -11) != "default.png"){
+                            if (substr($_SESSION['nm_caminho_foto'], -11) != "default.png") {
                                 unlink($_SESSION["nm_caminho_foto"]);
                             }
                         }
@@ -107,7 +107,7 @@ class PainelController extends Controller
                             else
                                 $finalImage = imagejpeg($newImage, OUTPUT);
                             if ($finalImage)
-                                echo 'Imagem criada com sucesso<img onload="getCoords();" id="toCrop" src="' .VENDOR_PATH.OUTPUT . '" /><input type="hidden" id="imgType" value="' . $fileType . '"/><input type="hidden" id="imgName" value="' . $newName . '"/>';
+                                echo 'Imagem criada com sucesso<img onload="getCoords();" id="toCrop" src="' . VENDOR_PATH . OUTPUT . '" /><input type="hidden" id="imgType" value="' . $fileType . '"/><input type="hidden" id="imgName" value="' . $newName . '"/>';
                             else
                                 echo 'Ocorreu um erro ao tentar criar a nova imagem';
                         }
@@ -115,44 +115,85 @@ class PainelController extends Controller
                 }
             });
 
-            \Router::rota("painel/nome", function () {
-                if (!empty($_POST['nome'])) {
-                    $this->model->atualizar($_POST['nome']);
-                    $this->view->render("painel", 'Painel Do Usuario', $this->generos);
-                } else {
-                    $this->view->render("painel", 'Painel Do Usuario', $this->generos);
-                }
-            });
             \Router::rota("painel/excluirfoto", function () {
                 if (!empty($_POST)) {
                     unlink($_SESSION["nm_caminho_foto"]);
                     $this->model->removerCaminhoFoto();
                     $_SESSION["nm_caminho_foto"] = "recursos/img/fotos_usuarios/default.png";
                     header('location: painel/..');
-                } 
+                }
             });
-            \Router::rota("painel/nickname", function () {
+            \Router::rota("painel/atualizar/nome", function () {
+                if (!empty($_POST['nome'])) {
+                    if (strlen($_POST["nome"]) <= 45) {
+
+                        if ($this->model->atualizar([$_POST['nome']], ["nm_usuario"])) {
+                            $_SESSION['nm_usuario'] = $_POST['nome'];
+                        };
+                        header("location: " . VENDOR_PATH . "painel");
+                    }else{
+                        $this->view->render("painel", 'Painel Do Usuario', $this->generos);
+                        $this->view->avisoModal("Numero maximo permitido é de 45 caracteres");
+                    }
+                } else {
+                    header("location: " . VENDOR_PATH . "painel");
+                }
+            });
+
+            \Router::rota("painel/atualizar/nickname", function () {
                 if (!empty($_POST['nickname'])) {
+                    if (strlen($_POST["nickname"]) <= 20) {
+                        if (!$this->model->verificarNickname($_POST['nickname'])) {
+                            if ($this->model->atualizar([$_POST['nickname']], ["nm_nickname"])) {
+                                $_SESSION['nm_nickname'] = $_POST['nickname'];
+                            };
+                            header("location: " . VENDOR_PATH . "painel");
+                        } else {
+                            $this->view->render("painel", 'Painel Do Usuario', $this->generos);
+                            $this->view->avisoModal("Nickname já esta em uso");
+                        }
+                    } else {
+                        $this->view->render("painel", 'Painel Do Usuario', $this->generos);
+                        $this->view->avisoModal("Numero maximo permitido é de 20 caracteres");
+                    }
                 } else {
-                    $this->view->render("painel", 'Painel Do Usuario', $this->generos);
+                    header("location: " . VENDOR_PATH . "painel");
                 }
             });
-            \Router::rota("painel/email", function () {
+
+            \Router::rota("painel/atualizar/email", function () {
                 if (!empty($_POST['email'])) {
+                    if (!$this->model->verificarEmail($_POST['email'])) {
+                        if ($this->model->atualizar([$_POST['email']], ["nm_email"])) {
+                            $_SESSION['nm_email'] = $_POST['email'];
+                        };
+                        header("location: " . VENDOR_PATH . "painel");
+                    } else {
+                        $this->view->render("painel", 'Painel Do Usuario', $this->generos);
+                        $this->view->avisoModal("Email já esta em uso");
+                    }
                 } else {
-                    $this->view->render("painel", 'Painel Do Usuario', $this->generos);
+                    header("location: " . VENDOR_PATH . "painel");
                 }
             });
-            \Router::rota("painel/senha", function () {
+            \Router::rota("painel/atualizar/senha", function () {
                 if (!empty($_POST['senha'])) {
+                    if ($this->model->atualizar([$_POST['senha']], ["nm_senha"])) {
+                        $_SESSION['nm_senha'] = $_POST['senha'];
+                    };
+                    header("location: " . VENDOR_PATH . "painel");
                 } else {
-                    $this->view->render("painel", 'Painel Do Usuario', $this->generos);
+                    header("location: " . VENDOR_PATH . "painel");
                 }
             });
-            \Router::rota("painel/cor", function () {
+            \Router::rota("painel/atualizar/cor", function () {
                 if (!empty($_POST['cor'])) {
+                    if ($this->model->atualizar([$_POST['cor']], ["nm_cor_favorita"])) {
+                        $_SESSION['nm_cor_favorita'] = $_POST['cor'];
+                    };
+                    header("location: " . VENDOR_PATH . "painel");
                 } else {
-                    $this->view->render("painel", 'Painel Do Usuario', $this->generos);
+                    header("location: " . VENDOR_PATH . "painel");
                 }
             });
 

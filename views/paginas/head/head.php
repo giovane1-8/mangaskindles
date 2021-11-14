@@ -9,7 +9,9 @@
   <link rel='stylesheet' type='text/css' media='screen' href='<?php echo VENDOR_PATH ?>recursos/css/bootstrap.min.css'>
   <link rel="stylesheet" href="https://unpkg.com/jcrop/dist/jcrop.css">
   <link rel='stylesheet' type='text/css' media='screen' href='<?php echo VENDOR_PATH ?>recursos/css/index.css'>
+  <style>
   
+  </style>
 </head>
 
 <body class='bodydarktheme'>
@@ -45,7 +47,7 @@
               <a class="nav-link" href="<?php echo VENDOR_PATH ?>cadastrar">Cadastrar</a>
             </li>
           <?php endif; ?>
-          
+
 
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -55,23 +57,23 @@
       </div>
     </nav>
 
-    <?php if(explode("/",@$_GET['url'])[0] != "painel"): ?>
-    <div class="alert alert-warning mt-3 mb-3 ">
-      <h4 style="color: red;" class="alert-heading">ALERTA!</h4>
-      <p>Nosso site não possui nenhum tipo de conteudo pirata somos só um agregador de link como o Google.</p>
-      <hr>
-      <p class="mb-0">Grato a Administração.</p>
-    </div>
+    <?php if (explode("/", @$_GET['url'])[0] != "painel") : ?>
+      <div class="alert alert-warning mt-3 mb-3 ">
+        <h4 style="color: red;" class="alert-heading">ALERTA!</h4>
+        <p>Nosso site não possui nenhum tipo de conteudo pirata somos só um agregador de link como o Google.</p>
+        <hr>
+        <p class="mb-0">Grato a Administração.</p>
+      </div>
 
-      
-    <div class="float-right">
-      <h3>Genero</h3>
-      <ul style="list-style: none">
-        <?php foreach ($AllGeneros as $key => $value) : ?>
 
-          <li><a style='color: black' href=" genero/<?php echo $AllGeneros[$key]['nm_genero'] ?> "> <?php echo $AllGeneros[$key]['nm_genero'] ?> </a></li>
+      <div class="float-right">
+        <h3>Genero</h3>
+        <ul style="list-style: none">
+          <?php foreach ($AllGeneros as $key => $value) : ?>
 
-        <?php endforeach; ?>
-      </ul>
-    </div>
+            <li><a style='color: black' href=" genero/<?php echo $AllGeneros[$key]['nm_genero'] ?> "> <?php echo $AllGeneros[$key]['nm_genero'] ?> </a></li>
+
+          <?php endforeach; ?>
+        </ul>
+      </div>
     <?php endif; ?>

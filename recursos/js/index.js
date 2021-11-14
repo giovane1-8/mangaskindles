@@ -19,12 +19,9 @@ const options = {
     saveInCookies: true, // default: true,
     label: '', // default: ''
     autoMatchOsTheme: false // default: true
-
 }
 darkmode = new Darkmode(options);
-if (darkmode.isActivated()) {
-    _("myonoffswitch").checked = true;
-}
+
 
 
 
@@ -111,7 +108,7 @@ function submitForm() {
                     console.log(request)
                     _('result').innerHTML = request.responseText;
                     $('.modal_alert_painel').modal('show');
-                    _("modal-footer").innerHTML = "<input onclick=' submitForm();' type='button ' class='btn btn-primary mx-auto darkmode-ignore ' value='Recortar '>"
+                    _("modal-footer").innerHTML = "<input onclick='submitForm();' type='button' class='btn btn-primary mx-auto darkmode-ignore ' value='Recortar '>"
                 }
                 if (_('toCrop')) {
                     _('sendButton').value = 'Recortar';
@@ -129,6 +126,83 @@ function submitForm() {
     }
 }
 $(".modal_alert_painel").on('hidden.bs.modal', function(e) {
-    _("result").innerHTML = " "
-    _("modal-footer").innerHTML = " "
-})
+        _("result").innerHTML = " "
+        _("modal-footer").innerHTML = " "
+    })
+    /* cria classe com js */
+function createCSSSelector(selector, style) {
+    if (!document.styleSheets) return;
+    if (document.getElementsByTagName('head').length == 0) return;
+
+    var styleSheet, mediaType;
+
+    if (document.styleSheets.length > 0) {
+        for (var i = 0, l = document.styleSheets.length; i < l; i++) {
+            if (document.styleSheets[i].disabled)
+                continue;
+            var media = document.styleSheets[i].media;
+            mediaType = typeof media;
+
+            if (mediaType === 'string') {
+                if (media === '' || (media.indexOf('screen') !== -1)) {
+                    styleSheet = document.styleSheets[i];
+                }
+            } else if (mediaType == 'object') {
+                if (media.mediaText === '' || (media.mediaText.indexOf('screen') !== -1)) {
+                    styleSheet = document.styleSheets[i];
+                }
+            }
+
+            if (typeof styleSheet !== 'undefined')
+                break;
+        }
+    }
+
+    if (typeof styleSheet === 'undefined') {
+        var styleSheetElement = document.createElement('style');
+        styleSheetElement.type = 'text/css';
+        document.getElementsByTagName('head')[0].appendChild(styleSheetElement);
+
+        for (i = 0; i < document.styleSheets.length; i++) {
+            if (document.styleSheets[i].disabled) {
+                continue;
+            }
+            styleSheet = document.styleSheets[i];
+        }
+
+        mediaType = typeof styleSheet.media;
+    }
+
+    if (mediaType === 'string') {
+        for (var i = 0, l = styleSheet.rules.length; i < l; i++) {
+            if (styleSheet.rules[i].selectorText && styleSheet.rules[i].selectorText.toLowerCase() == selector.toLowerCase()) {
+                styleSheet.rules[i].style.cssText = style;
+                return;
+            }
+        }
+        styleSheet.addRule(selector, style);
+    } else if (mediaType === 'object') {
+        var styleSheetLength = (styleSheet.cssRules) ? styleSheet.cssRules.length : 0;
+        for (var i = 0; i < styleSheetLength; i++) {
+            if (styleSheet.cssRules[i].selectorText && styleSheet.cssRules[i].selectorText.toLowerCase() == selector.toLowerCase()) {
+                styleSheet.cssRules[i].style.cssText = style;
+                return;
+            }
+        }
+        styleSheet.insertRule(selector + '{' + style + '}', styleSheetLength);
+    }
+}
+if (darkmode.isActivated()) {
+    _("myonoffswitch").checked = true;
+    createCSSSelector("body::-webkit-scrollbar", "background-color: #000 !important;")
+}
+
+function mostrarSenha(input, button) {
+    if (input.type == "text") {
+        input.type = "password"
+        button.innerHTML = "Mostrar"
+    } else if (input.type == "password") {
+        input.type = "text"
+        button.innerHTML = "Esconde"
+    }
+}

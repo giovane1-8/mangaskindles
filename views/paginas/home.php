@@ -15,7 +15,6 @@
 </div>
 
 
-
 <div class='modal fade' id='sucessoModal' tabindex='-1' role='dialog' aria-labelledby='TituloModalCentralizado' aria-hidden='true'>
   <div class='modal-dialog modal-dialog-centered' role='document'>
     <div class='modal-content'>
@@ -37,7 +36,7 @@
 
 
 
-<div class=" card-deck mt-4">
+<div class="card-deck  mt-4">
   <div class="card">
     <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/hunterxhunter.png" alt="Imagem de capa do card">
     <div class="card-body">

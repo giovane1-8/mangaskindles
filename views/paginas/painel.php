@@ -11,7 +11,7 @@
                 <output id="result"></output>
             </div>
             <div id="modal-footer" class="modal-footer">
-                
+
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
 
             <?php
             if (substr($_SESSION["nm_caminho_foto"], -11) != "default.png") {
-                echo "<form action='".VENDOR_PATH."painel/excluirfoto' method='POST'>
+                echo "<form action='" . VENDOR_PATH . "painel/excluirfoto' method='POST'>
                         <input type='hidden' name='hidden'>
                         <input type='submit' class='btn btn-primary darkmode-ignore' value='Remover Foto';'>
                       </form>";
@@ -45,72 +45,75 @@
 
 
     <div class="container form-group col-lg-6">
-        <div class="form-group">
-            <label for="nome">Nome e sobrenome</label>
-            <form action='<?php echo VENDOR_PATH ?>painel/nome' method="post">
+        <form action="<?php echo VENDOR_PATH; ?>painel/atualizar/nome" method="POST">
+
+            <div class="form-group">
+                <label for="nome">Nome e sobrenome</label>
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control disable" name="nome" id="nome" aria-describedby="emailHelp" placeholder="Seu nome" value="<?php if (isset($_SESSION[" nm_usuario "])) {
-                                                                                                                                                            echo $_SESSION["nm_usuario "];
-                                                                                                                                                        } ?>">
+                    <input type="text" maxlength="45" class="form-control disable" name="nome" id="nome" aria-describedby="emailHelp" placeholder="Seu nome" value='<?php echo $_SESSION["nm_usuario"]; ?>'>
 
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Atualizar</button>
 
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Atualizar</button>
                     </div>
                 </div>
-            </form>
+        </form>
+
+        <form action="<?php echo VENDOR_PATH; ?>painel/atualizar/nickname" method="POST">
 
             <label for="nickname">Nickname</label>
+
             <div class="input-group mb-3">
 
-                <input type="text" class="form-control" name="nickname" id="nickname" aria-describedby="emailHelp" placeholder="Ex: Starkiller889" value="<?php if (isset($_SESSION[" nm_nickname "])) {
-                                                                                                                                                                echo $_SESSION["nm_nickname "];
-                                                                                                                                                            } ?>">
+                <input type="text" maxlength="20" class="form-control" name="nickname" id="nickname" aria-describedby="emailHelp" placeholder="Ex: Starkiller889" value="<?php echo $_SESSION["nm_nickname"]; ?>">
 
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Atualizar</button>
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Atualizar</button>
 
                 </div>
             </div>
+        </form>
+
+        <form action="<?php echo VENDOR_PATH; ?>painel/atualizar/email" method="POST">
+
             <label for="email">Email</label>
 
             <div class="input-group mb-3">
-                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Seu email" value="<?php if (isset($_SESSION[" nm_email "])) {
-                                                                                                                                                    echo $_SESSION["nm_email "];
-                                                                                                                                                } ?>">
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Seu email" value="<?php echo $_SESSION["nm_email"]; ?>">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Atualizar</button>
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Atualizar</button>
                 </div>
-
             </div>
+        </form>
 
+        <form action="<?php echo VENDOR_PATH; ?>painel/atualizar/senha" method="POST">
 
             <label for="senha">Senha</label>
             <div class="input-group mb-3">
 
-                <input type="password" name="senha" class="form-control" id="senha" value="<?php if (isset($_SESSION[" nm_senha "])) {
-                                                                                                echo $_SESSION["nm_senha "];
-                                                                                            } ?>">
+                <input type="password" name="senha" class="form-control" id="senha" value="<?php echo $_SESSION["nm_senha"]; ?>">
 
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Atualizar</button>
+                    <button class="btn btn-outline-info" type="button" id="senhaToggle" onclick='mostrarSenha(_("senha"),_("senhaToggle"))'>mostrar</button>
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Atualizar</button>
+
                 </div>
             </div>
+        </form>
 
+        <form action="<?php echo VENDOR_PATH; ?>painel/atualizar/cor" method="POST">
             <label for="cor">Cor favorita</label>
             <div class="input-group mb-3">
-                <input type="color" name="cor" class="form-control" id="cor" value="<?php if (isset($_SESSION[" nm_cor_favorita "])) {
-                                                                                        echo $_SESSION["nm_cor_favorita "];
-                                                                                    } else {
-                                                                                        echo "#fff ";
-                                                                                    } ?>">
+                <input type="color" name="cor" maxlength="7" class="form-control" id="cor" value="<?php echo $_SESSION["nm_cor_favorita"]; ?>">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Atualizar</button>
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Atualizar</button>
                 </div>
             </div>
-        </div>
+        </form>
+
     </div>
+</div>
 </div>
 <script>
 </script>

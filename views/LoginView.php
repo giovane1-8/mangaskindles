@@ -11,7 +11,6 @@ class LoginView extends View
                 <script>
                     $('#err').modal('show');
                     setTimeout(() =>{
-                        debugger
                      },3000);
                     setTimeout(() =>{
                         $('#err').modal('hide')
