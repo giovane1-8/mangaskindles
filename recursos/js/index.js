@@ -35,7 +35,7 @@ if (!isIOS) {
             _("navbar").style.top = "0";
             _("footbar").style.bottom = "0";
         } else {
-            _("navbar").style.top = "-100px";
+            _("navbar").style.top = "-300px";
             _("footbar").style.bottom = "-68px";
         }
         prevScrollpos = currentScrollPos;
