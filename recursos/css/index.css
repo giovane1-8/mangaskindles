@@ -143,6 +143,14 @@ body::-webkit-scrollbar {
     transition: 1s !important;
 }
 
+.darkmode--activated .carousel-control-prev-icon {
+    filter: invert(100%) !important;
+}
+
+.darkmode--activated .carousel-control-next-icon {
+    filter: invert(100%) !important;
+}
+
 
 /* CONFIGURAÇÃO MODO DARK final*/
 
