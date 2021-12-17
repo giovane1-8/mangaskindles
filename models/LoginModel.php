@@ -25,6 +25,7 @@
                 $_SESSION['nm_email'] = $return['nm_email'];
                 $_SESSION['nm_nickname'] = $return['nm_nickname'];
                 $_SESSION['nm_cor_favorita'] = $return['nm_cor_favorita'];
+                $_SESSION['nm_vip'] = $return['nm_vip'];
                 $_SESSION['nm_caminho_foto'] = (empty($return['nm_caminho_foto'])) ? "recursos/img/fotos_usuarios/default.png" : $return['nm_caminho_foto'];
                 $this -> resultado = true;
             }else{ 

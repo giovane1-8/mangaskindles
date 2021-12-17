@@ -4,5 +4,3 @@
     class HomeModel extends Model{
         
     }
-
-?>
