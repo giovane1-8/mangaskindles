@@ -17,8 +17,23 @@ class SetupController extends Controller
                 if (!empty($_POST)) {
                     $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
                     $dados["imagem_manga"] = $_FILES["imagem_manga"];
+                    $permitido = array('png', 'jpeg');
+                    var_dump($dados["imagem_manga"]);
                     if (count($dados) == 6 && $dados["generos"] != 0 && !empty($dados["nome_manga"]) && !empty($dados["editora"]) && !empty($dados["sinopse"]) && !empty($dados["imagem_manga"]) && !empty($dados["botao_submit"])) {
-                    echo"foi";
+                        $ext = explode(".", $dados["imagem_manga"]['name']);
+                        if (in_array(strtolower(end($ext)), $permitido)) {
+
+
+
+                            
+                            echo "foi aaaaa";
+
+
+
+
+                        } else {
+                            header("location: " . VENDOR_PATH . "setup/erro");
+                        }
                     } else {
                         header("location: " . VENDOR_PATH . "setup/erro");
                     }
