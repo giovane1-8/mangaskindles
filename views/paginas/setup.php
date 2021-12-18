@@ -1,10 +1,27 @@
+<div style='color: black' class='modal fade' id='err' tabindex='-1' role='dialog' aria-labelledby='TituloModalCentralizado' aria-hidden='true'>
+    <div class='modal-dialog modal-dialog-centered' role='document'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='TituloModalCentralizado'>
+                    <font color='red'>Erro</font>
+                </h5>
+                <button type='button' class='close' data-dismiss='modal' aria-label='Fechar'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+            <div class='modal-body'>
+                Erro ao enviar os dados, tente novamente
+            </div>
+        </div>
+    </div>
+</div>
 <h1>Adicionar manga</h1>
-<form>
+<form id="form" enctype="multipart/form-data" method="POST">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Nome</span>
         </div>
-        <input type="text" placeholder="jujutsu kaisen" class="form-control" name="nome_manga" required>
+        <input type="text" placeholder="Jujutsu Kaisen" class="form-control" name="nome_manga" required>
     </div>
 
     <div class="input-group mb-3">
@@ -25,7 +42,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Capa</span>
         </div>
-        <input  type="file" class="form-control" name="sinopse" required>
+        <input type="file" accept=".png, .jpeg" class="form-control" name="imagem_manga" required>
     </div>
 
     <div class="input-group">
@@ -37,9 +54,9 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
                 <?php foreach ($AllGeneros as $key => $value) : ?>
-                    <label style="cursor: pointer;" class="dropdown-item">
+                    <label style="cursor: pointer; color: black;" class="dropdown-item">
                         <?php echo $AllGeneros[$key]['nm_genero'] ?>
-                        <input type="checkbox" id="<?php echo $AllGeneros[$key]['nm_genero'] ?>" value="<?php echo $AllGeneros[$key]['id_genero'] ?>" name="generos" required>
+                        <input type="checkbox" id="<?php echo $AllGeneros[$key]['nm_genero'] ?>" value="<?php echo $AllGeneros[$key]['id_genero'] ?>" name='generos[]'>
                     </label>
                 <?php endforeach; ?>
 
@@ -47,23 +64,50 @@
         </div>
         <script>
             window.addEventListener("load", function() {
+
+
+
+                var inputs = document.querySelectorAll("input[name='generos[]']");
+
+                function verificar() {
+                    return [].filter.call(inputs, function(input) {
+                        return input.checked;
+                    }).length;
+                }
+                $("input[name='generos[]']").on('click', function(event) {
+                    event.stopPropagation();
+
+                    var valido = verificar();
+                    if (!valido) {
+                        alert('Falta escolher uma checkbox!');
+                        _("btnSubmit").style.display = "none";
+                        _("form").action = "";
+                    } else {
+                        _("btnSubmit").style.display = "block";
+                        _("form").action = "<?php echo VENDOR_PATH; ?>setup/addmanga";
+                    }
+                });
+
                 $(document).on('click', '.dropdown-item', function(event) {
                     event.stopPropagation();
                 });
                 $("#pesquisa-dropdown").keyup(function() {
                     var options = $("label[class='dropdown-item']")
-                    options.each(function(index,element) {
+                    options.each(function(index, element) {
                         elementoText = element.innerText.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase().trim()
                         pesquisa = $("#pesquisa-dropdown").val().normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase().trim()
-                        if(elementoText.match(pesquisa)){
+                        if (elementoText.match(pesquisa)) {
                             element.style.display = "block";
-                        }else{
+                        } else {
                             element.style.display = "none";
                         }
                     });
                 })
             })
         </script>
+    </div>
+    <div class="input-group mb-3">
+        <input type="submit" class="form-control" name="botao_submit" id="btnSubmit" value="Adicionar manga" style="display: none;">
     </div>
 
 
