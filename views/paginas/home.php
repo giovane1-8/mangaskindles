@@ -33,13 +33,6 @@
         }
     }
 
-    @media only screen and (max-device-width: 614px) {
-        .carousel-control-next {}
-    }
-
-    @media only screen and (max-device-width: 426px) {
-        .control-proximo-p {}
-    }
 </style>
 <div class='modal fade' id='sucessoModal' tabindex='-1' role='dialog' aria-labelledby='TituloModalCentralizado' aria-hidden='true'>
     <div class='modal-dialog modal-dialog-centered' role='document'>
@@ -92,7 +85,7 @@
                 <div class="row">
                     <div class="col-lg-4 d-flex " style="padding: 0;">
                         <div class="card">
-                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/attackontitanAntesdaqueda.png" alt="Imagem de capa do card">
+                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/ataque dos titãs - antes da queda.png" alt="Imagem de capa do card">
                             <div class="card-body">
                                 <h5 class="card-title">Título do card</h5>
                                 <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
@@ -140,7 +133,7 @@
                 <div class="row">
                     <div class="col-lg-4 d-flex " style="padding: 0;">
                         <div class="card">
-                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/attackontitanAntesdaqueda.png" alt="Imagem de capa do card">
+                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/ataque dos titãs - antes da queda.png" alt="Imagem de capa do card">
                             <div class="card-body">
                                 <h5 class="card-title">Título do card</h5>
                                 <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
@@ -187,7 +180,7 @@
 
                     <div class="col-lg-4 d-flex " style="padding: 0;">
                         <div class="card">
-                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/attackontitanAntesdaqueda.png" alt="Imagem de capa do card">
+                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/ataque dos titãs - antes da queda.png" alt="Imagem de capa do card">
                             <div class="card-body">
                                 <h5 class="card-title">Título do card</h5>
                                 <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
@@ -258,7 +251,7 @@
                 <div class="row">
                     <div class="col-lg-4 d-flex " style="padding: 0;">
                         <div class="card">
-                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/attackontitanAntesdaqueda.png" alt="Imagem de capa do card">
+                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/ataque dos titãs - antes da queda.png" alt="Imagem de capa do card">
                             <div class="card-body">
                                 <h5 class="card-title">Título do card</h5>
                                 <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
@@ -306,7 +299,7 @@
                 <div class="row">
                     <div class="col-lg-4 d-flex " style="padding: 0;">
                         <div class="card">
-                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/attackontitanAntesdaqueda.png" alt="Imagem de capa do card">
+                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/ataque dos titãs - antes da queda.png" alt="Imagem de capa do card">
                             <div class="card-body">
                                 <h5 class="card-title">Título do card</h5>
                                 <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
@@ -353,7 +346,7 @@
 
                     <div class="col-lg-4 d-flex " style="padding: 0;">
                         <div class="card">
-                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/attackontitanAntesdaqueda.png" alt="Imagem de capa do card">
+                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/ataque dos titãs - antes da queda.png" alt="Imagem de capa do card">
                             <div class="card-body">
                                 <h5 class="card-title">Título do card</h5>
                                 <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
@@ -423,7 +416,7 @@
                 <div class="row">
                     <div class="col-lg-4 d-flex " style="padding: 0;">
                         <div class="card">
-                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/attackontitanAntesdaqueda.png" alt="Imagem de capa do card">
+                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/ataque dos titãs - antes da queda.png" alt="Imagem de capa do card">
                             <div class="card-body">
                                 <h5 class="card-title">Título do card</h5>
                                 <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
@@ -471,7 +464,7 @@
                 <div class="row">
                     <div class="col-lg-4 d-flex " style="padding: 0;">
                         <div class="card">
-                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/attackontitanAntesdaqueda.png" alt="Imagem de capa do card">
+                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/ataque dos titãs - antes da queda.png" alt="Imagem de capa do card">
                             <div class="card-body">
                                 <h5 class="card-title">Título do card</h5>
                                 <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
@@ -518,7 +511,7 @@
 
                     <div class="col-lg-4 d-flex " style="padding: 0;">
                         <div class="card">
-                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/attackontitanAntesdaqueda.png" alt="Imagem de capa do card">
+                            <img class="card-img-top" src="<?php echo VENDOR_PATH ?>recursos\img\capas_mangas/ataque dos titãs - antes da queda.png" alt="Imagem de capa do card">
                             <div class="card-body">
                                 <h5 class="card-title">Título do card</h5>
                                 <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>

@@ -10,11 +10,27 @@
                 </button>
             </div>
             <div class='modal-body'>
-                Erro ao enviar os dados, tente novamente
+                <output id="result"></output>
             </div>
         </div>
     </div>
 </div>
+
+<div class='modal fade' id='sucessoModal' tabindex='-1' role='dialog' aria-labelledby='TituloModalCentralizado' aria-hidden='true'>
+    <div class='modal-dialog modal-dialog-centered' role='document'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='TituloModalCentralizado'>Cadastrado com
+                    <font color='green'>SUCESSO</font>
+                </h5>
+                <button type='button' class='close' data-dismiss='modal' aria-label='Fechar'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <h1>Adicionar manga</h1>
 <form id="form" enctype="multipart/form-data" method="POST">
     <div class="input-group mb-3">
@@ -42,10 +58,10 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Capa</span>
         </div>
-        <input type="file" accept=".png, .jpeg" class="form-control" name="imagem_manga" required>
+        <input type="file" placeholder="784 X 436" id="imagem_manga" accept=".png, .jpeg" class="form-control" name="imagem_manga" required>
     </div>
 
-    <div class="input-group">
+    <div class="input-group mb-3">
         <div class="input-group-prepend mr-2">
             <span class="input-group-text" id="basic-addon1">Generos</span>
         </div>
@@ -62,12 +78,11 @@
 
             </div>
         </div>
+        <img id="imgN" class="d-none">
         <script>
             window.addEventListener("load", function() {
-
-
-
-                var inputs = document.querySelectorAll("input[name='generos[]']");
+                // verifica se checkbox e imagem estou corretos
+                var x, y = false
 
                 function verificar() {
                     return [].filter.call(inputs, function(input) {
@@ -79,18 +94,64 @@
 
                     var valido = verificar();
                     if (!valido) {
-                        alert('Falta escolher uma checkbox!');
-                        _("btnSubmit").style.display = "none";
-                        _("form").action = "";
+                        $('#err').modal('show');
+                        _('result').innerHTML = '<center>Falta escolher o generos</center>'
+
+                        y = false
+                        validarBotao()
+
                     } else {
-                        _("btnSubmit").style.display = "block";
-                        _("form").action = "<?php echo VENDOR_PATH; ?>setup/addmanga";
+                        y = true
+                        validarBotao()
                     }
                 });
 
+                function validarBotao() {
+                    if (x && y) {
+
+                        _("btnSubmit").style.display = "block";
+                        _("form").action = "<?php echo VENDOR_PATH; ?>setup/addmanga";
+                    } else {
+
+                        _("btnSubmit").style.display = "none";
+                        _("form").action = "";
+                    }
+                }
+
+                _("imagem_manga").addEventListener("change", function() {
+                    if (this.files && this.files[0]) {
+                        var file = new FileReader();
+                        file.onload = function(e) {
+                            img = _("imgN");
+                            img.src = e.target.result;
+                            setTimeout(() => {
+                                if (img.naturalHeight != 436 || img.naturalWidth != 784) {
+                                    $('#err').modal('show');
+                                    _('result').innerHTML = '<center> A imagem deve ter 436 X 784 pixels</center>';
+
+                                    x = false
+                                    validarBotao()
+
+                                } else {
+                                    x = true
+                                    validarBotao()
+                                }
+                            }, 500);
+                        };
+                        file.readAsDataURL(this.files[0]);
+                    }
+                }, false);
+
+
+                var inputs = document.querySelectorAll("input[name='generos[]']");
+
+
+                //nÃO DEIXA DROPDOWN SUMIR QUANDO SELECIONA UM CHECKBOX
                 $(document).on('click', '.dropdown-item', function(event) {
                     event.stopPropagation();
                 });
+
+                // PESQUISA PARA DROPDOWN
                 $("#pesquisa-dropdown").keyup(function() {
                     var options = $("label[class='dropdown-item']")
                     options.each(function(index, element) {
@@ -103,10 +164,30 @@
                         }
                     });
                 })
+                $("#pesquisa-dropdown-genero").keyup(function() {
+                    var options = $("p[class='dropdown-item']")
+                    options.each(function(index, element) {
+                        elementoText = element.innerText.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase().trim()
+                        pesquisa = $("#pesquisa-dropdown-genero").val().normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase().trim()
+                        if (elementoText.match(pesquisa)) {
+                            element.style.display = "block";
+                        } else {
+                            element.style.display = "none";
+                        }
+                        console.log(pesquisa)
+                        if (pesquisa != "") {
+                            _("btnGenero").style.display = "block";
+                            _("formGenero").action = "<?php echo VENDOR_PATH; ?>setup/addgenero"
+                        } else {
+                            _("btnGenero").style.display = "none";
+                            _("formGenero").action = ""
+                        }
+                    });
+                })
             })
         </script>
     </div>
-    <div class="input-group mb-3">
+    <div class="input-group">
         <input type="submit" class="form-control" name="botao_submit" id="btnSubmit" value="Adicionar manga" style="display: none;">
     </div>
 
@@ -114,3 +195,30 @@
 </form>
 
 <h1>Adicionar capitulo de manga</h1>
+<h1>Adicionar Genero</h1>
+<form method="POST" id="formGenero">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend mr-2">
+            <span class="input-group-text" id="basic-addon1">Generos</span>
+        </div>
+        <div class="dropdown">
+
+            <input require type="text" style="cursor: pointer;" class="input-group-text dropdown-toggle" name="genero" id="pesquisa-dropdown-genero" data-toggle="dropdown">
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                <?php foreach ($AllGeneros as $key => $value) : ?>
+                    <p class="dropdown-item"><?php echo $AllGeneros[$key]['nm_genero'] ?></p>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="input-group">
+        <input type="submit" class="form-control" name="botao_submit" id="btnGenero" value="Adicionar Genero" style="display: none;">
+    </div>
+</form>
