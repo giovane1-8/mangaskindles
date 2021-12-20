@@ -27,11 +27,13 @@ class SetupController extends Controller
 
 
                             $this->model->salvarManga($dados);
+                            
                             if ($this->model->getResult()) {
                                 header("location: " . VENDOR_PATH . "setup/sucesso");
                             } else {
                                 header("location: " . VENDOR_PATH . "setup/erroBd");
                             }
+                            
                         } elseif ($largura != 784 || $altura != 436) {
                             header("location: " . VENDOR_PATH . "setup/erroImg");
                         } else {
@@ -49,7 +51,9 @@ class SetupController extends Controller
                 if (!empty($_POST)) {
                     $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
                     if (!empty($dados["botao_submit"]) && !empty($dados["genero"]) && trim($dados["genero"]) != null) {
+
                         $this->model->salvarGenero($dados);
+
                         if ($this->model->getResult()) {
                             header("location: " . VENDOR_PATH . "setup/sucesso");
                         } else {
@@ -62,29 +66,34 @@ class SetupController extends Controller
             });
             // ROTAS DE MENSAGENS ==================================
             \Router::rota("setup/erro", function () {
-                $this->view->render("setup", 'Servidor', $this->generos, "setup", "setup");
+                $this->view->render("setupPags/setup", 'Servidor', $this->generos, "setup", "setup");
                 $this->view->avisoModal("Erro ao enviar os dados, tente novamente");
             });
             \Router::rota("setup/erroImg", function () {
-                $this->view->render("setup", 'Servidor', $this->generos, "setup", "setup");
+                $this->view->render("setupPags/setup", 'Servidor', $this->generos, "setup", "setup");
                 $this->view->avisoModal("Insira a imagem com tamanho 784 x 436");
             });
             \Router::rota("setup/erro", function () {
-                $this->view->render("setup", 'Servidor', $this->generos, "setup", "setup");
+                $this->view->render("setupPags/setup", 'Servidor', $this->generos, "setup", "setup");
                 $this->view->avisoModal("Erro ao enviar os dados, tente novamente");
             });
             \Router::rota("setup/erroBd", function () {
-                $this->view->render("setup", 'Servidor', $this->generos, "setup", "setup");
+                $this->view->render("setupPags/setup", 'Servidor', $this->generos, "setup", "setup");
                 $this->view->avisoModal("Erro ao salvar no banco de dados");
             });
             \Router::rota("setup/sucesso", function () {
-                $this->view->render("setup", 'Servidor', $this->generos, "setup", "setup");
+                $this->view->render("setupPags/setup", 'Servidor', $this->generos, "setup", "setup");
                 $this->view->sucessoModal();
+            });
+
+            #PAGINA PARA EXCLUSÃO
+            \Router::rota("setup/excluir", function () {
+                $this->view->render("setupPags/excluir", 'Servidor', $this->generos, "setup", "setup");
             });
 
 
             //render("NOME DO ARQUIVOU DO CORPO", 'TITULO DA PAGINA', 'CABEÇA DA PAGINA , FOOTER DA PAGINA')
-            $this->view->render("setup", 'Servidor', $this->generos, "setup", "setup");
+            $this->view->render("setupPags/setup", 'Servidor', $this->generos, "setup", "setup");
         } else {
             header("location: .");
         }

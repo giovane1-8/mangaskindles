@@ -10,11 +10,11 @@
   <link rel="stylesheet" href="https://unpkg.com/jcrop/dist/jcrop.css">
   <link rel='stylesheet' type='text/css' media='screen' href='<?php echo VENDOR_PATH ?>recursos/css/index.css'>
   <style>
-  
+
   </style>
 </head>
 
-<body class='bodydarktheme'>
+<body>
   <div class="container pb-5">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id="navbar" style="transition: 0.5s;">
@@ -49,9 +49,16 @@
           <?php endif; ?>
 
           <?php if (@$_SESSION['nm_vip'] == "gm") : ?>
-            <li class="col nav-item">
-              <a class="nav-link" style="color: '#fff' " href="<?php echo VENDOR_PATH ?>setup">configurações do servidor</a>
-            </li>
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                configurações do servidor
+              </a>
+              <div class="dropdown-menu" aria-labelledby="triggerId">
+                <a class="dropdown-item" href="<?php echo VENDOR_PATH ?>setup">Adicionar dados</a>
+                <a class="dropdown-item" href="<?php echo VENDOR_PATH ?>setup/excluir">Excluir dados</a>
+              </div>
+            </div>
+
           <?php endif; ?>
 
         </ul>

@@ -31,7 +31,7 @@
             <label for="exampleInputPassword1">Senha</label>
             <input type="password" name="senha" class="form-control" placeholder="Senha" required>
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-primary">Logar</button>
     </form>
 
 </div>

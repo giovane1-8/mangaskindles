@@ -24,10 +24,9 @@ darkmode = new Darkmode(options);
 
 
 
-
+/* REMOVE NAVBAR E NAV(de baixo ) AO MOVER A TELA */
 var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 if (!isIOS) {
-    /* When the user scrolls down, hide the navbar & footbar. When the user scrolls up, show the navbar & footbar */
     var prevScrollpos = window.pageYOffset;
     window.onscroll = function() {
         var currentScrollPos = window.pageYOffset;
@@ -274,12 +273,20 @@ function hexToComplimentary(hex) {
     return "#" + (0x1000000 | rgb).toString(16).substring(1);
 }
 
-function mostrarSenha(input, button) {
-    if (input.type == "text") {
-        input.type = "password"
-        button.innerHTML = "Mostrar"
-    } else if (input.type == "password") {
-        input.type = "text"
-        button.innerHTML = "Esconde"
-    }
-}
+$("#pesquisar_manga_ajax").keyup(function() {
+    $.ajax({
+        url: "./procurarManga",
+        data:{manga: _("pesquisar_manga_ajax").value},
+        method: "POST",
+        success: function(dados,string,obg){
+            console.log(dados)
+        },
+        error: function(obg,erro,op){
+            console.log(erro)
+        },
+        complete: function (obg,msn) {
+            alert("terminou")
+        }
+    })
+
+})

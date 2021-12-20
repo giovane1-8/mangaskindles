@@ -101,6 +101,17 @@
                 </div>
             </div>
         </form>
+        <script>
+            function mostrarSenha(input, button) {
+                if (input.type == "text") {
+                    input.type = "password"
+                    button.innerHTML = "Mostrar"
+                } else if (input.type == "password") {
+                    input.type = "text"
+                    button.innerHTML = "Esconde"
+                }
+            }
+        </script>
 
         <form action="<?php echo VENDOR_PATH; ?>painel/atualizar/cor" method="POST">
             <label for="cor">Cor favorita</label>
