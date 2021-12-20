@@ -49,21 +49,30 @@
           <?php endif; ?>
 
           <?php if (@$_SESSION['nm_vip'] == "gm") : ?>
-            <div class="dropdown">
-              <a class="nav-link dropdown-toggle" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                configurações do servidor
-              </a>
-              <div class="dropdown-menu" aria-labelledby="triggerId">
-                <a class="dropdown-item" href="<?php echo VENDOR_PATH ?>setup">Adicionar dados</a>
-                <a class="dropdown-item" href="<?php echo VENDOR_PATH ?>setup/excluir">Excluir dados</a>
+            <center>
+              <div class="dropdown">
+                <a class="nav-link dropdown-toggle" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  configurações do servidor
+                </a>
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                  <a class="dropdown-item" href="<?php echo VENDOR_PATH ?>setup">Adicionar dados</a>
+                  <a class="dropdown-item" href="<?php echo VENDOR_PATH ?>setup/excluir">Excluir dados</a>
+                </div>
               </div>
-            </div>
-
+            </center>
           <?php endif; ?>
 
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+
+          <div class="dropdown">
+            <input class="form-control mr-sm-2 dropdown-toggle" type="search" id="pesquisarMangaAjax" placeholder="Pesquisar" aria-label="Pesquisar" data-toggle="dropdown">
+
+            <div class="dropdown-menu" id='dropPesquisa' aria-labelledby="dropdownMenuButton">
+
+            </div>
+
+          </div>
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
         </form>
       </div>

@@ -12,6 +12,7 @@
             $this->model = $model;
 
             $this -> generos = $this -> model -> getAllGeneros();
+            
         }
         
     }

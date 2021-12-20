@@ -1,5 +1,5 @@
 var darkmode;
-const DEFAULT_PATH = "/Site de Livros Kindle  0.0.2/"
+const DEFAULT_PATH = "/Site%20de%20Livros%20Kindle%20%200.0.2/"
 
 function _(element) {
     if (document.getElementById(element))
@@ -28,7 +28,7 @@ darkmode = new Darkmode(options);
 var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 if (!isIOS) {
     var prevScrollpos = window.pageYOffset;
-    window.onscroll = function() {
+    window.onscroll = function () {
         var currentScrollPos = window.pageYOffset;
         if (prevScrollpos > currentScrollPos) {
             _("navbar").style.top = "0";
@@ -102,7 +102,7 @@ function submitForm() {
             }
             request.open('POST', DEFAULT_PATH + includeFile, true);
 
-            request.onreadystatechange = function() {
+            request.onreadystatechange = function () {
                 if (request.status == 200) {
                     console.log(request)
                     _('result').innerHTML = request.responseText;
@@ -124,11 +124,11 @@ function submitForm() {
         _('result').innerHTML = 'Por favor, selecione uma imagem para ser enviada!';
     }
 }
-$(".modal_alert_painel").on('hidden.bs.modal', function(e) {
-        _("result").innerHTML = " "
-        _("modal-footer").innerHTML = " "
-    })
-    /* cria classe com js */
+$(".modal_alert_painel").on('hidden.bs.modal', function (e) {
+    _("result").innerHTML = " "
+    _("modal-footer").innerHTML = " "
+})
+/* cria classe com js */
 function createCSSSelector(selector, style) {
     if (!document.styleSheets) return;
     if (document.getElementsByTagName('head').length == 0) return;
@@ -200,7 +200,7 @@ function hexToComplimentary(hex) {
 
     // Convert hex to rgb
     // Credit to Denis http://stackoverflow.com/a/36253499/4939630
-    var rgb = 'rgb(' + (hex = hex.replace('#', '')).match(new RegExp('(.{' + hex.length / 3 + '})', 'g')).map(function(l) { return parseInt(hex.length % 2 ? l + l : l, 16); }).join(',') + ')';
+    var rgb = 'rgb(' + (hex = hex.replace('#', '')).match(new RegExp('(.{' + hex.length / 3 + '})', 'g')).map(function (l) { return parseInt(hex.length % 2 ? l + l : l, 16); }).join(',') + ')';
 
     // Get array of RGB values
     rgb = rgb.replace(/[^\d,]/g, '').split(',');
@@ -273,20 +273,28 @@ function hexToComplimentary(hex) {
     return "#" + (0x1000000 | rgb).toString(16).substring(1);
 }
 
-$("#pesquisar_manga_ajax").keyup(function() {
+
+$("#pesquisarMangaAjax").keyup(function () {
+    dropdownMenu = document.querySelector("#dropPesquisa");
+    
     $.ajax({
-        url: "./procurarManga",
-        data:{manga: _("pesquisar_manga_ajax").value},
+        dataType: "json",
+        url: DEFAULT_PATH + "home/procurarManga",
+        data: { manga: _("pesquisarMangaAjax").value.trim() },
         method: "POST",
-        success: function(dados,string,obg){
+        success: function (dados, string, obg) {
             console.log(dados)
+            dropdownMenu.innerHTML = ""
+            dados.forEach(manga => {
+                console.log(manga)
+                dropdownMenu.innerHTML += "<a style='color: black; cursor: pointer;' class='dropdown-item'>"+manga['nm_manga']+"</a>";
+            });
         },
-        error: function(obg,erro,op){
+        error: function (obg, erro, op) {
             console.log(erro)
         },
-        complete: function (obg,msn) {
-            alert("terminou")
+        complete: function (obg, msn) {
+
         }
     })
-
 })
