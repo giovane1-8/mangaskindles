@@ -34,16 +34,16 @@ class PainelController extends Controller
                         $finalImage = imagejpeg($newImage, OUTPUT);
                     }
                     if ($finalImage) {
-                        echo 'Imagem criada com sucesso<img id="thumbnail" src="' . VENDOR_PATH . OUTPUT . '" />';
+                        $this->view->echoVar('Imagem criada com sucesso<img id="thumbnail" src="' . VENDOR_PATH . OUTPUT . '" />');
                     } else {
-                        echo 'Ocorreu um erro ao tentar criar a nova imagem';
+                        $this->view->echoVar('Ocorreu um erro ao tentar criar a nova imagem');
                     }
                     unlink("recursos/img/tmp/" . $imgName);
 
 
                     if (!$this->model->addFotoPerfil(OUTPUT)) {
                         unlink("recursos/img/fotos_usuarios/" . $imgName);
-                        echo "Erro ao Salvar imagem no banco de dados";
+                        $this->view->echoVar("Erro ao Salvar imagem no banco de dados");
                     } else {
                         $a = explode(".", $_SESSION['nm_caminho_foto']);
                         $n = explode(".", $imgName);
@@ -72,15 +72,15 @@ class PainelController extends Controller
                         $permitido = array('image/png', 'image/jpeg');
                         define('OUTPUT', 'recursos/img/tmp/' . $newName);
                         if (in_array($fileType, $permitido) == false)
-                            echo 'Por favor selecione um arquivo do tipo JPEG ou PNG.';
+                            $this->view->echoVar('Por favor selecione um arquivo do tipo JPEG ou PNG.');
                         elseif ($fileError == 4)
-                            echo 'Desculpe, mas o arquivo não foi enviado, por favor, tente novamente,';
+                            $this->view->echoVar('Desculpe, mas o arquivo não foi enviado, por favor, tente novamente,');
                         elseif ($fileError == 3)
-                            echo 'Desculpe, o envio do arquivo não foi completado com sucesso, por favor, tente novamente.';
+                            $this->view->echoVar('Desculpe, o envio do arquivo não foi completado com sucesso, por favor, tente novamente.');
                         elseif ($fileError == 2)
-                            echo 'Esta imagem é muito grande, por favor, selecione uma imagem de até 2MB de tamanho!';
+                            $this->view->echoVar('Esta imagem é muito grande, por favor, selecione uma imagem de até 2MB de tamanho!');
                         elseif ($fileError == 1)
-                            echo 'Esta imagem é muito grande, por favor, selecione uma imagem de até 2MB de tamanho!';
+                            $this->view->echoVar('Esta imagem é muito grande, por favor, selecione uma imagem de até 2MB de tamanho!');
                         else {
                             if ($fileType == 'image/png')
                                 $img = imagecreatefrompng($fileTMP);
@@ -107,9 +107,9 @@ class PainelController extends Controller
                             else
                                 $finalImage = imagejpeg($newImage, OUTPUT);
                             if ($finalImage)
-                                echo 'Imagem criada com sucesso<img onload="getCoords();" id="toCrop" src="' . VENDOR_PATH . OUTPUT . '" /><input type="hidden" id="imgType" value="' . $fileType . '"/><input type="hidden" id="imgName" value="' . $newName . '"/>';
+                                $this->view->echoVar('Imagem criada com sucesso<img onload="getCoords();" id="toCrop" src="' . VENDOR_PATH . OUTPUT . '" /><input type="hidden" id="imgType" value="' . $fileType . '"/><input type="hidden" id="imgName" value="' . $newName . '"/>');
                             else
-                                echo 'Ocorreu um erro ao tentar criar a nova imagem';
+                                $this->view->echoVar('Ocorreu um erro ao tentar criar a nova imagem');
                         }
                     }
                 }
@@ -132,7 +132,7 @@ class PainelController extends Controller
                             $_SESSION['nm_usuario'] = $nome;
                         };
                         header("location: " . VENDOR_PATH . "painel");
-                    }else{
+                    } else {
                         $this->view->render("painel", 'Painel Do Usuario', $this->generos);
                         $this->view->avisoModal("Numero maximo permitido é de 45 caracteres");
                     }

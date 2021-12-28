@@ -26,4 +26,7 @@
                 include(self::PATHPAGES."footer/".$footer.".php"); 
             }
         }
+        function echoVar($var){
+            echo $var;
+        }
     }

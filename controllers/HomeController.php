@@ -21,7 +21,7 @@
                 if(!empty($_POST)){
                     $request = $_POST["manga"];
                     $dados = $this -> model -> procurarManga($request);
-                    echo $dados;
+                    $this->view->echoVar($dados);
                 }else{
                     header("location: ".VENDOR_PATH);
                 }

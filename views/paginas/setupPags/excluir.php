@@ -1,6 +1,6 @@
 <h1>Excluir Mangá</h1>
 
-<form method="POST" id="formGenero">
+<form method="POST" autocomplete="off" id="formGenero">
     <div class="input-group mb-3">
         <div class="input-group-prepend mr-2">
             <span class="input-group-text" id="basic-addon1">Mangá:</span>
@@ -14,7 +14,7 @@
             </div>
 
         </div>
-        <input type="submit" class="form-control ml-2 btn-danger" style="max-width: 10rem; border-radius:5px;" name="botao_submit" id="btnGenero" value="Excluir manga">
+        <input type="submit"  class="form-control ml-2 btn-danger" style="max-width: 10rem; border-radius:5px;" name="botao_submit" id="btnGenero" value="Excluir manga">
 
     </div>
     <div id="ajax_resultado"></div>
