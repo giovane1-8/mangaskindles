@@ -32,7 +32,7 @@
 </div>
 
 <h1>Adicionar manga</h1>
-<form id="form" enctype="multipart/form-data" method="POST">
+<form id="form" autocomplete="off" enctype="multipart/form-data" method="POST">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Nome</span>
@@ -194,9 +194,9 @@
 
 </form>
 
-<h1>Adicionar capitulo de manga</h1>
+<h1>Adicionar volume de manga</h1>
 <h1>Adicionar Genero</h1>
-<form method="POST" id="formGenero">
+<form method="POST" id="formGenero" autocomplete="off">
     <div class="input-group mb-3">
         <div class="input-group-prepend mr-2">
             <span class="input-group-text" id="basic-addon1">Generos</span>

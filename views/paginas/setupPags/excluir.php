@@ -1,6 +1,6 @@
 <h1>Excluir Mangá</h1>
 
-<form method="POST" autocomplete="off" id="formGenero">
+<form method="POST" action="excluirManga" autocomplete="off" id="formGenero">
     <div class="input-group mb-3">
         <div class="input-group-prepend mr-2">
             <span class="input-group-text" id="basic-addon1">Mangá:</span>
@@ -37,7 +37,7 @@
                         dropdownMenu.innerHTML = ""
                         dados.forEach(manga => {
                             console.log(manga)
-                            dropdownMenu.innerHTML += "<label style='cursor: pointer; color: black' class='dropdown-item'> "+manga['nm_manga'] + "<input style='color: black' type='radio' value='" + manga['id_manga'] + "' name='manga'>";
+                            dropdownMenu.innerHTML += "<label style='cursor: pointer; color: black' class='dropdown-item'> "+manga['nm_manga'] + "<input style='color: black' type='radio' value='" + manga['id_manga'] + "' name='manga' required>";
                             dropdownMenu.innerHTML += "</label>";
                         });
                         $(document).on('click', '.dropdown-item', function(event) {

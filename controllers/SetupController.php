@@ -13,6 +13,19 @@ class SetupController extends Controller
     {
         if ($_SESSION["isLogado"] && $_SESSION["nm_vip"] == "gm") {
 
+            \Router::rota("setup/excluirManga", function(){
+                if (!empty($_POST["manga"])) {
+                    $idmanga = $_POST["manga"];
+                    $this->model->excluirManga($idmanga);
+                    
+                    if ($this->model->getResult()) {
+                        header("location: " . VENDOR_PATH . "setup/excluir/sucesso");
+                    } else {
+                        header("location: " . VENDOR_PATH . "setup/excluir/erro");
+                    }
+                    
+                }
+            });
             # VALIDAR E ADICIONAR MANGA NO BANCO DE DADOS
             \Router::rota("setup/addmanga", function () {
                 if (!empty($_POST)) {
@@ -25,7 +38,7 @@ class SetupController extends Controller
                         list($largura, $altura) = getimagesize($dados["imagem_manga"]["tmp_name"]);
                         if (in_array(strtolower(end($ext)), $permitido)) {
 
-
+                            $dados["nome_manga"] = ucfirst($dados["nome_manga"]);
                             $this->model->salvarManga($dados);
                             
                             if ($this->model->getResult()) {
@@ -85,10 +98,20 @@ class SetupController extends Controller
                 $this->view->render("setupPags/setup", 'Servidor', $this->generos, "setup", "setup");
                 $this->view->sucessoModal();
             });
-
+            
             #PAGINA PARA EXCLUSÃO
             \Router::rota("setup/excluir", function () {
                 $this->view->render("setupPags/excluir", 'Servidor', $this->generos, "setup", "setup");
+            });
+
+            #ROTA DE MSN PARA PAGINA DA EXCLUSÃO            
+            \Router::rota("setup/excluir/sucesso", function () {
+                $this->view->render("setupPags/excluir", 'Servidor', $this->generos, "setup", "setup");
+                $this->view->avisoModal("Manga Excluido com sucesso");
+            });
+            \Router::rota("setup/excluir/erro", function () {
+                $this->view->render("setupPags/excluir", 'Servidor', $this->generos, "setup", "setup");
+                $this->view->avisoModal("Erro ao apagar manga");
             });
 
 
