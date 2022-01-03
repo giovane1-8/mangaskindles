@@ -20,7 +20,7 @@ class Model
     }
     function getAllGeneros()
     {
-        $result = $this->PDO->prepare("SELECT * FROM tb_genero");
+        $result = $this->PDO->prepare("SELECT * FROM tb_genero ORDER BY nm_genero");
         $result->execute();
         $return = $result->fetchAll(PDO::FETCH_ASSOC);
         return $return;

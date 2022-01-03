@@ -66,7 +66,7 @@
         <form autocomplete="off" class="form-inline my-2 my-lg-0">
 
           <div class="dropdown">
-            <input class="form-control mr-sm-2 dropdown-toggle"  type="search" id="pesquisarMangaAjax" placeholder="Pesquisar" aria-label="Pesquisar" data-toggle="dropdown">
+            <input class="form-control mr-sm-2 dropdown-toggle" type="search" id="pesquisarMangaAjax" placeholder="Pesquisar" aria-label="Pesquisar" data-toggle="dropdown">
 
             <div class="dropdown-menu" id='dropPesquisa' aria-labelledby="dropdownMenuButton">
 
@@ -77,3 +77,20 @@
         </form>
       </div>
     </nav>
+    <div style='color: black' class='modal fade' id='err' tabindex='-1' role='dialog' aria-labelledby='TituloModalCentralizado' aria-hidden='true'>
+      <div class='modal-dialog modal-dialog-centered' role='document'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h5 class='modal-title' id='TituloModalCentralizado'>
+            <output id="result"></output>
+
+            </h5>
+            <button type='button' class='close' data-dismiss='modal' aria-label='Fechar'>
+              <span aria-hidden='true'>&times;</span>
+            </button>
+          </div>
+          <div class='modal-body'>
+          </div>
+        </div>
+      </div>
+    </div>

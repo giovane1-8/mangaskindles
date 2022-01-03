@@ -1,21 +1,3 @@
-<div style='color: black' class='modal fade' id='err' tabindex='-1' role='dialog' aria-labelledby='TituloModalCentralizado' aria-hidden='true'>
-    <div class='modal-dialog modal-dialog-centered' role='document'>
-        <div class='modal-content'>
-            <div class='modal-header'>
-                <h5 class='modal-title' id='TituloModalCentralizado'>
-                    <font color='red'>Erro</font>
-                </h5>
-                <button type='button' class='close' data-dismiss='modal' aria-label='Fechar'>
-                    <span aria-hidden='true'>&times;</span>
-                </button>
-            </div>
-            <div class='modal-body'>
-                <output id="result"></output>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class='modal fade' id='sucessoModal' tabindex='-1' role='dialog' aria-labelledby='TituloModalCentralizado' aria-hidden='true'>
     <div class='modal-dialog modal-dialog-centered' role='document'>
         <div class='modal-content'>
@@ -67,7 +49,7 @@
         </div>
         <div class="dropdown">
             <input type="text" style="cursor: pointer;" class="input-group-text dropdown-toggle" id="pesquisa-dropdown" data-toggle="dropdown">
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" style="max-height: 300px;overflow: auto;" aria-labelledby="dropdownMenuButton">
 
                 <?php foreach ($AllGeneros as $key => $value) : ?>
                     <label style="cursor: pointer; color: black;" class="dropdown-item">
@@ -174,7 +156,6 @@
                         } else {
                             element.style.display = "none";
                         }
-                        console.log(pesquisa)
                         if (pesquisa != "") {
                             _("btnGenero").style.display = "block";
                             _("formGenero").action = "<?php echo VENDOR_PATH; ?>setup/addgenero"
@@ -195,17 +176,142 @@
 </form>
 
 <h1>Adicionar volume de manga</h1>
+
+<form id="formVolume" autocomplete="off" enctype="multipart/form-data" method="POST">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Nome</span>
+        </div>
+        <input type="text" placeholder="Trevas Cegantes" class="form-control" name="nome_volume" required>
+    </div>
+
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Data de lançamento</span>
+        </div>
+        <input type="date" id="data_lancamento" class="form-control" name="data_lancamento" required>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Capa</span>
+        </div>
+        <input type="file" placeholder="784 X 436" id="imagem_volume" accept=".png, .jpeg" class="form-control" name="imagem_volume" required>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend mr-2">
+            <span class="input-group-text" id="basic-addon1">Mangá</span>
+        </div>
+        <div class="dropdown">
+
+            <input type="text" placeholder="Procure o mangá" style="cursor: pointer;" class="input-group-text dropdown-toggle" id="pesquisar_manga_id_ajax" data-toggle="dropdown">
+
+            <div class="dropdown-menu" id='dropExclui' aria-labelledby="dropdownMenuButton">
+
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        window.addEventListener("load", function() {
+            var a, b = false
+
+            function validarBotaoVolume() {
+                if (a) {
+
+                    _("btnVolume").style.display = "block";
+                    _("formVolume").action = "<?php echo VENDOR_PATH; ?>setup/addVolume";
+                } else {
+
+                    _("btnVolume").style.display = "none";
+                    _("formVolume").action = "";
+                }
+            }
+
+            _("imagem_volume").addEventListener("change", function() {
+                if (this.files && this.files[0]) {
+                    var file = new FileReader();
+                    file.onload = function(e) {
+                        img = _("imgN");
+                        img.src = e.target.result;
+                        setTimeout(() => {
+                            if (img.naturalHeight != 436 || img.naturalWidth != 784) {
+                                $('#err').modal('show');
+                                _('result').innerHTML = '<center> A imagem deve ter 436 X 784 pixels</center>';
+
+                                a = false
+                                validarBotaoVolume()
+
+                            } else {
+                                a = true
+                                validarBotaoVolume()
+                            }
+                        }, 500);
+                    };
+                    file.readAsDataURL(this.files[0]);
+                }
+            }, false);
+
+
+            $(document).on('click', '.dropdown-item', function(event) {
+                event.stopPropagation();
+            });
+            $("#pesquisar_manga_id_ajax").keyup(function() {
+
+                document.querySelector('#dropExclui').classList.add("show");
+
+                dropdownMenu = document.querySelector("#dropExclui");
+                $.ajax({
+                    dataType: "json",
+                    url: DEFAULT_PATH + "home/procurarManga",
+                    data: {
+                        manga: _("pesquisar_manga_id_ajax").value.trim()
+                    },
+                    method: "POST",
+                    success: function(dados, string, obg) {
+                        dropdownMenu.innerHTML = ""
+                        dados.forEach(manga => {
+                            dropdownMenu.innerHTML += "<label style='cursor: pointer; color: black' class='dropdown-item'> " + manga['nm_manga'] + "<input style='color: black' type='radio' value='" + manga['id_manga'] + "' name='manga' required>";
+                            dropdownMenu.innerHTML += "</label>";
+                        });
+                        $(document).on('click', '.dropdown-item', function(event) {
+                            event.stopPropagation();
+                        });
+                    },
+                    error: function(obg, erro, op) {
+                        console.log(erro)
+                    },
+                    complete: function(obg, msn) {
+
+                    }
+                })
+            })
+        })
+    </script>
+
+<div class="input-group">
+        <input type="submit" class="form-control" name="botao_submit" id="btnVolume" value="Adicionar Volume" style="display: none;">
+    </div>
+</form>
+
+
+
+
+
 <h1>Adicionar Genero</h1>
-<form method="POST" id="formGenero" autocomplete="off">
+<form method="POST" id="formGenero" action="" autocomplete="off">
     <div class="input-group mb-3">
         <div class="input-group-prepend mr-2">
             <span class="input-group-text" id="basic-addon1">Generos</span>
         </div>
         <div class="dropdown">
 
-            <input require type="text" style="cursor: pointer;" class="input-group-text dropdown-toggle" name="genero" id="pesquisa-dropdown-genero" data-toggle="dropdown">
+            <input require type="text" style="cursor: pointer;" class="input-group-text dropdown-toggle" name="genero" id="pesquisa-dropdown-genero" data-toggle="dropdown" require>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" style="max-height: 300px;  overflow: auto;" aria-labelledby="dropdownMenuButton">
 
                 <?php foreach ($AllGeneros as $key => $value) : ?>
                     <p class="dropdown-item"><?php echo $AllGeneros[$key]['nm_genero'] ?></p>
